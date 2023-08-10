@@ -1,4 +1,4 @@
-export default class LogInPage {
+class LogInPage {
 
     elements = {
         usernameField: () => cy.get('input[type="text"]'),
@@ -28,7 +28,7 @@ export default class LogInPage {
         this.elements.logInButton().click();
     }
 
-    checkFilesUrl() {
+    checkUrlAfterLogIn() {
         this.elements.getUrl().should('equal', 'http://51.250.1.158:49153/files/');
     }
 
@@ -37,3 +37,5 @@ export default class LogInPage {
         cy.clearLocalStorage();
     }
 }
+
+export default new LogInPage();

@@ -1,2 +1,2 @@
 # CypressAutomation
-Проект с автотестами Front'а на Cypress
+Проект с автотестами Front'а сервиса FileBrowser на Cypress

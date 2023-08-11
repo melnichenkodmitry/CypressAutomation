@@ -1,16 +1,18 @@
 import LogInPage from '../support/pages/LogInPage.js';
+import FilesPage from '../support/pages/FilesPage.js'
 
-describe('Тестирование авторизации пользователя', function () {
+describe('Тестирование пути login', function () {
 
     beforeEach(function () {
         cy.visit('/');
-        LogInPage.clearCookiesAndLocalStorage();
+        cy.clearCookies();
+        cy.clearLocalStorage();
     })
 
     it('1. Успешная авторизация. user=admin, pass=admin', () => {
 
         cy.login('admin', 'admin');
-        LogInPage.checkUrlAfterLogIn();
+        FilesPage.checkUrl();
     })
 
     it('2. Неуспешная авторизация. user=admin, pass=password', () => {
@@ -82,6 +84,30 @@ describe('Тестирование авторизации пользовател
         cy.login('admin', 'admin');
 
         cy.wait('@login').its('response.statusCode').should('equal', 500);
+    })
 
+    it('11. Проверка наличия изображения на странице', () => {
+
+        LogInPage.checkImage();
+    })
+
+    it('12. Проверка наличия названия File Browser', () => {
+
+        LogInPage.checkFileBrowser();
+    })
+
+    it('13. Проверка placeholder\'а Имя пользователя', () => {
+
+        LogInPage.checkUsernamePlaceholder();
+    })
+
+    it('14. Проверка placeholder\'а Пароль', () => {
+
+        LogInPage.checkPasswordPlaceholder();
+    })
+
+    it('15. Проверка значения кнопки Войти', () => {
+
+        LogInPage.checkLogInButtonPlaceholder();
     })
 })

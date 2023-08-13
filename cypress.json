@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://51.250.1.158:49153/login",
+  "baseUrl": "http://51.250.1.158:49153",
   "useRelativeSnapshots": true,
   "ignoreTestFiles": ["*snapshots.js", "*mock.js"],
   "chromeWebSecurity": false,
@@ -7,7 +7,3 @@
   "viewportWidth": 1280,
   "viewportHeight": 720
 }
-
-
-
-

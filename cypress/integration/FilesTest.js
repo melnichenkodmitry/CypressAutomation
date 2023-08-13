@@ -1,18 +1,16 @@
 import FilesPage from '../support/pages/FilesPage.js'
 import LogInPage from '../support/pages/LogInPage.js';
 
-describe('Тестирование пути files', function () {
+describe('Тестирование директории files', function () {
 
     beforeEach(function () {
-        cy.visit('/');
-        cy.clearCookies();
-        cy.clearLocalStorage();
+        cy.visit('/login');
         cy.login('admin', 'admin');
     })
 
     it('1. Выход из учетной записи', () => {
 
-        FilesPage.clickLogOutButton();
-        LogInPage.checkUrl();
+        FilesPage.elements.logOutButton().click()
+        cy.url().should('equal', 'http://51.250.1.158:49153/login')
     })
 })

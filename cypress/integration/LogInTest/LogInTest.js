@@ -1,5 +1,5 @@
-import LogInPage from '../support/pages/LogInPage.js';
-import FilesPage from '../support/pages/FilesPage.js'
+import LogInPage from '../../support/pages/LogInPage.js';
+import FilesPage from '../../support/pages/FilesPage.js'
 import spok from "cy-spok";
 
 describe('Тестирование директории login', function () {

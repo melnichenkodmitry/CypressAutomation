@@ -1,4 +1,5 @@
 import {mockRequests} from "./mock";
+import filesPage from "../../support/pages/FilesPage";
 
 describe('Тестирование изменения вида файлов', function () {
 
@@ -6,17 +7,15 @@ describe('Тестирование изменения вида файлов', fu
 
         mockRequests()
         cy.loginUI('melnichenko', '1');
-        cy.wait('@resources')
-        cy.wait('@usage')
-        cy.get('div[aria-label="melnichenko"]').click()
+        filesPage.waitForPageToLoad()
     })
 
     it('Проверка существования 3-х состояний вида: mosaic gallery, list, mosaic', () => {
 
         cy.intercept('PUT', '**/8').as('8')
-        cy.get('div[id="dropdown"] > :nth-child(7)').click()
+        filesPage.elements.viewButton().click()
         cy.wait('@8').its('request.body').should('match', /mosaic gallery|list|mosaic/)
-        cy.get('div[id="dropdown"] > :nth-child(7)').children('i').invoke('text').should('match', /view_list|view_module|grid_view/)
+        filesPage.elements.viewButton().children('i').invoke('text').should('match', /view_list|view_module|grid_view/)
     })
 
     it('Проверка подмены статус кода на 500 при изменении вида', () => {
@@ -24,10 +23,8 @@ describe('Тестирование изменения вида файлов', fu
         cy.intercept('PUT', '**/8', {
             statusCode: 500
         }).as('8')
-        cy.get('div[id="dropdown"] > :nth-child(7)').click()
+        filesPage.elements.viewButton().click()
         cy.wait('@8')
-        cy.get('.noty_body').should('exist').and('have.text', '[object Object]')
-        cy.get('div[class="noty_buttons"] > :nth-child(1)').should('exist').and('have.text', 'Сообщить о проблеме')
-        cy.get('div[class="noty_buttons"] > :nth-child(2)').should('exist').and('have.text', 'Закрыть')
+        filesPage.checkError()
     })
 })
